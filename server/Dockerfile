@@ -1,6 +1,6 @@
 ARG MODULES="all"
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0.418-bullseye-slim-amd64 as base-all
+FROM mcr.microsoft.com/dotnet/sdk:8.0.402-bookworm-slim-amd64 as base-all
 
 USER root
 
