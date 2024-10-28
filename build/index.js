@@ -111,7 +111,7 @@ async function buildBranch(branch, moduleType) {
         const [buildHash, tags] = generateTags(branch, version, moduleType, modulesVersions);
         console.log(chalk.gray('Building server with tags ' + tags.map(e => chalk.white(chalk.bold(e))).join(', ')));
 
-        const dockerFile = branch === 'release' ? './server/Dockerfile' : './server/DockerfileDotnet8'
+        const dockerFile = './server/Dockerfile'
 
         await buildDocker(serverImageName, tags, branch, dockerFile, moduleType, buildHash);
         console.log(chalk.green('Server on branch ') + chalk.white(chalk.bold(branch)) + chalk.green(' built successfully'));
