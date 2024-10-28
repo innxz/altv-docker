@@ -17,7 +17,7 @@ RUN apt-get clean
 RUN mkdir /altv
 RUN echo '{"loadBytecodeModule":true,"loadCSharpModule":true}' > /altv/.altvpkgrc.json
 
-FROM node:20.11.0-bookworm-slim as base-js
+FROM node:22.8.0-bookworm-slim as base-js
 
 USER root
 
