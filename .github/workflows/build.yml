@@ -51,7 +51,7 @@ jobs:
         id: cache
         shell: bash
         run: |
-          echo "VERSION=${{ github.event.inputs.CACHE }}" >> $GITHUB_OUTPUT
+          echo "CACHE=${{ github.event.inputs.CACHE }}" >> $GITHUB_OUTPUT
 
       - name: Build
         run: |
