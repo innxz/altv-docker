@@ -6,12 +6,6 @@ on:
       - '*'
   schedule:
     - cron: "0 0 * * *"
-  workflow_dispatch:
-    inputs:
-      use_cache:
-        description: 'Use docker cache [cache/nocache]'
-        required: true
-        default: 'cache'  
 
 permissions:
   contents: read
@@ -46,17 +40,11 @@ jobs:
       - name: Update dependencies
         working-directory: ./build
         run: npm i
-        
-      - name: Extract cache
-        id: cache
-        shell: bash
-        run: |
-          echo "CACHE=${{ github.event.inputs.CACHE }}" >> $GITHUB_OUTPUT
 
       - name: Build
         run: |
           export ACTIONS_CACHE_URL=$(echo "$ACTIONS_ID_TOKEN_REQUEST_URL" | grep -Po 'https://[^/]+/[^/]+/' | sed  's/pipelines/artifactcache/')
           export ACTIONS_RUNTIME_TOKEN=$ACTIONS_ID_TOKEN_REQUEST_TOKEN
-          node ./build/index.js ${{ steps.version.outputs.CACHE }}
+          node ./build/index.js cache
         env:
           FORCE_COLOR: 2
