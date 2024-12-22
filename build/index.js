@@ -1,5 +1,4 @@
 import chalk from 'chalk';
-import fs from 'fs';
 import fetch from 'node-fetch';
 import crypto from 'crypto';
 import { exec } from 'child_process';
@@ -73,7 +72,7 @@ async function buildBranch(branch, moduleType) {
         modules.push("js-bytecode-module");
     }
     
-    if (modules === "all") {
+    if (moduleType === "all") {
         modules.push('coreclr-module')
     }
 
@@ -101,7 +100,7 @@ async function buildBranch(branch, moduleType) {
             console.log(chalk.yellow('Module ') + chalk.bold(chalk.whiteBright(module)) + chalk.yellow(' does not have SDK version!'));
             return;
         }
-        if (moduleSdkVersion != sdkVersion) {
+        if (moduleSdkVersion !== sdkVersion) {
             console.log(chalk.redBright('SDK mismatch on module ') + chalk.bold(chalk.whiteBright(module + ' ' + moduleUpdate.sdkVersion)));
             return;
         }

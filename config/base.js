@@ -16,8 +16,7 @@ export function obj(obj) {
 
 export function exists(env) {
     const val = process.env[env];
-    if (val == null) return false;
-    return true;
+    return val != null;
 }
 
 export function str(env) {
@@ -62,7 +61,6 @@ export function generate(filename, getSettings) {
             if (exists('ALTV_USE_ENV_CONFIG')) return 0;
             console.log(chalk.yellowBright('Found existing ' + chalk.bold(filename) + '! Skipping environment server parameters'));
             console.log('You can change this behavior or hide this message by setting ' + chalk.bold('ALTV_USE_ENV_CONFIG') + ' option');
-            // console.log('See ' + chalk.bold('https://go.altv.mp/docker-env-config') + ' for more details');
             return 0;
         }
 

@@ -1,7 +1,7 @@
 import { obj, str, num, arr, bool, jsonObj, exists, generate } from './base.js';
 
 process.exit(generate('server.toml', () => {
-    const defaultModules = [ 'js-module' ];
+    const defaultModules = ['js-module', 'js-module-v2'];
 
     if (process.env.ALTV_MODULE_TYPE === 'all') {
         defaultModules.push('csharp-module');
@@ -70,6 +70,8 @@ process.exit(generate('server.toml', () => {
         modules: arr('ALTV_MODULES') ?? defaultModules,
         resources: arr('ALTV_RESOURCES') ?? ['*'],
         logStreams: arr('ALTV_LOG_STREAMS'),
+        logTimeFormat: str('ALTV_LOG_TIME_FORMAT'),
+        logsToKeep: num('ALTV_LOGS_TO_KEEP'),
         worldProfiler: obj({
             host: str('ALTV_WORLD_PROFILER_HOST'),
             port: num('ALTV_WORLD_PROFILER_PORT')
@@ -82,6 +84,10 @@ process.exit(generate('server.toml', () => {
             syncReceive: num('ALTV_THREADS_SYNC_RECEIVE'),
         }),
         dlcWhitelist: arr('ALTV_DLC_WHITELIST'),
+        disableOptionalProps: bool('ALTV_DISABLE_OPTIONAL_PROPS'),
+        'antiCheat': obj({
+            weaponSwitch: bool('ALTV_WEAPON_SWITCH')
+        }),
         'csharp-module': obj({
             disableDependencyDownload: bool('ALTV_CSHARP_DISABLE_DEPENDENCY_DOWNLOAD')
         }),
