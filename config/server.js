@@ -86,8 +86,11 @@ process.exit(generate('server.toml', () => {
         dlcWhitelist: arr('ALTV_DLC_WHITELIST'),
         disableOptionalProps: bool('ALTV_DISABLE_OPTIONAL_PROPS'),
         'antiCheat': obj({
-            weaponSwitch: bool('ALTV_WEAPON_SWITCH')
+            weaponSwitch: bool('ALTV_ANTI_CHEAT_WEAPON_SWITCH'),
+            collision: bool('ALTV_ANTI_CHEAT_COLLISION')
         }),
+        resourceContainerizerMode: bool('ALTV_RESOURCE_CONTAINERIZER_NODE'),
+        resourceBlockSize: num('ALTV_RESOURCE_BLOCK_SIZE'),
         'csharp-module': obj({
             disableDependencyDownload: bool('ALTV_CSHARP_DISABLE_DEPENDENCY_DOWNLOAD')
         }),
