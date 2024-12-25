@@ -1,10 +1,18 @@
 import { obj, str, num, arr, bool, jsonObj, exists, generate } from './base.js';
 
 process.exit(generate('server.toml', () => {
-    const defaultModules = ['js-module', 'js-module-v2'];
+    const defaultModules = ['js-module'];
 
-    if (process.env.ALTV_MODULE_TYPE === 'all') {
-        defaultModules.push('csharp-module');
+    switch (process.env.ALTV_MODULE_TYPE) {
+        case 'csharp':
+            defaultModules.push('csharp-module');
+            break;
+        case 'jsv2':
+            defaultModules.push('js-module-v2');
+            break;
+        case 'all':
+            defaultModules.push('csharp-module', 'js-module-v2');
+            break;
     }
 
     if (process.env.ALTV_BRANCH === 'release') {
