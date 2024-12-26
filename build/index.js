@@ -68,12 +68,19 @@ async function buildBranch(branch, moduleType) {
     console.log(chalk.gray('Building branch ') + chalk.white(chalk.bold(branch)) + chalk.gray(' with modules ') + chalk.white(chalk.bold(moduleType)));
 
     const modules = ["js-module"];
+
     if (branch === "release") {
         modules.push("js-bytecode-module");
     }
-    
-    if (moduleType === "all") {
-        modules.push('coreclr-module')
+
+    const moduleMapping = {
+        all: ['coreclr-module', 'js-module-v2'],
+        csharp: ['coreclr-module'],
+        jsv2: ['js-module-v2']
+    };
+
+    if (moduleType in moduleMapping) {
+        modules.push(...moduleMapping[moduleType]);
     }
 
     const serverUpdateReq = await fetch(`${CDN_URL}/server/${branch}/${platform}/update.json`);
@@ -131,6 +138,8 @@ async function run() {
     for (const branch of branches) {
         await buildBranch(branch, "js");
         await buildBranch(branch, "all");
+        await buildBranch(branch, "jsv2");
+        await buildBranch(branch, "csharp");
     }
 }
 
